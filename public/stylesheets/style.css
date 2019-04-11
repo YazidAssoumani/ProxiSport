@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-=======
 * {
   box-sizing: border-box;
 }
 
->>>>>>> 20460462e4fd00136dade00ed2832210c235ff72
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -13,8 +10,6 @@ body {
 a {
   color: #00B7FF;
 }
-<<<<<<< HEAD
-=======
 
 img {
   width: 10vw;
@@ -126,4 +121,3 @@ img {
       transform: rotateY(360deg);
   }
 }
->>>>>>> 20460462e4fd00136dade00ed2832210c235ff72

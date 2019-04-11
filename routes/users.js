@@ -67,8 +67,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 
         console.log("MAJ ok");
         res.send('Le compte est MAJ');
-      }
-      );
+      });
     //récupérer les données du compte dans la BDD
     //Modif les données du compte dans la BDD et dans la page
     

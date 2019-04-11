@@ -3,21 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'ProxiSport' });
 });
-
-//   res.render('index', { title: 'ProxiSport' });
-// });
 
 /* GET CGU. */
 router.get('/cgu', function(req, res, next) {
   res.render('cgu', {});
 });
 
-
-// router.get('/map', function(req, res, next) {
-//   res.render('map', {});
-// });
 router.get('/connexion_user', function(req, res, next) {
   res.render('connexion_user', {});
 });

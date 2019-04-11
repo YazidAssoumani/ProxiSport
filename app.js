@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 var mapRouter = require('./routes/map');
 var createError = require('http-errors'),
     express = require('express'),
