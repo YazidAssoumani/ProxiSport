@@ -2,33 +2,34 @@
 
 {% block body %}
   <h1>{{title}}</h1>
-  <p>Le sport le plus proche de chez toi</p>
-
-  <section class="slidershow">
-    <div id="content">
-      <div id="content-carroussel">
-        <figure class="shadow"> <img src="images/soccer.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/skateboard.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/hiking.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/bicycle.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/weightlifter.png" alt=""> </figure>
-        <figure class="shadow">
-          <figcaption> Démineur </figcaption> 
-          <a target="_blank" href="../Jeux/Demineur_M&M/index.html">
-            <img src="images/basketball.png" alt=""> 
-            <span> Cliquez pour accéder</span> 
-          </a>
-        </figure>
-        <figure class="shadow">
-          <figcaption> Pong </figcaption> 
-          <a target="_blank" href="../Jeux/Pong/index.html"> 
-            <img src="images/jogging.png" alt=""> 
-            <span> Cliquez pour accéder</span> 
-          </a>
-        </figure>
-        <figure class="shadow"> <img src="images/jogging.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/jogging.png" alt=""> </figure>
-      </div>
+    <div id="block">
+    <form action="/map" method="get" class ="ui form">
+        <div class="field">
+            <label for="lieux" value="Lieux"></label>
+            <input type="text" name="lieux" id="lieux">
+            <label for="sports" value="Activité"></label>
+            <input type="text" name="sports" id="sports">
+        </div>
+        <button type="submit">
+        <i class="icon edit">
+        <p>GO !</p>
+        </button>
     </div>
-  </section>
+    <style> 
+    #block{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        justify-content: center;
+        background-color: grey;
+    }
+    </style>
 {% endblock %}
