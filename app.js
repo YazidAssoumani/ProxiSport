@@ -1,13 +1,3 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var mapRouter = require('./routes/map');
 var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
@@ -18,9 +8,8 @@ var createError = require('http-errors'),
     loginRouter = require('./routes/login'),
     // mapRouter = require('./routes/map1'),
     commentRouter = require('./routes/comment'),
-    bodyParser = require('body-parser');
-// var mapRouter = require('./routes/map');
-// // var mapRouter = require('./routes/map');
+    bodyParser = require('body-parser'),
+    mapRouter = require('./routes/map');
 
 var app = express();
 
@@ -33,6 +22,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+// app.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end(JSON.stringify(req.body, null, 2))
+// })
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
