@@ -67,7 +67,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
       {$set : {nom : new_nom, prenom : new_prenom, email : new_email, birth : new_birth}}, function(err, result){
         if (err) throw err;
 
-        res.html('Le compte est MAJ');
+        res.send('Le compte est MAJ');
       }
       );
     //récupérer les données du compte dans la BDD
@@ -77,7 +77,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   
   router.delete('/:id', function(req, res, next) {
     DB.collection('users').remove({_id: new ObjectId(req.params.id)})
-      res.html('Le compte est supprimer');
+      res.send('Le compte est supprimer');
     
   });
 
