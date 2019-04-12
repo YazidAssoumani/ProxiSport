@@ -3,12 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'ProxiSport' });
+  res.render('index', { title: 'Express' });
 });
 
-/* GET CGU. */
 router.get('/cgu', function(req, res, next) {
   res.render('cgu', {});
 });
+
+
+// router.get('/map', function(req, res, next) {
+//   res.render('map', {});
+// });
 
 module.exports = router;

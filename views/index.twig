@@ -1,34 +1,128 @@
+
 {% extends 'layout.twig' %}
 
 {% block body %}
-  <h1>{{title}}</h1>
-  <p>Le sport le plus proche de chez toi</p>
-
-  <section class="slidershow">
-    <div id="content">
-      <div id="content-carroussel">
-        <figure class="shadow"> <img src="images/soccer.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/skateboard.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/hiking.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/bicycle.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/weightlifter.png" alt=""> </figure>
-        <figure class="shadow">
-          <figcaption> Démineur </figcaption> 
-          <a target="_blank" href="../Jeux/Demineur_M&M/index.html">
-            <img src="images/basketball.png" alt=""> 
-            <span> Cliquez pour accéder</span> 
-          </a>
-        </figure>
-        <figure class="shadow">
-          <figcaption> Pong </figcaption> 
-          <a target="_blank" href="../Jeux/Pong/index.html"> 
-            <img src="images/jogging.png" alt=""> 
-            <span> Cliquez pour accéder</span> 
-          </a>
-        </figure>
-        <figure class="shadow"> <img src="images/jogging.png" alt=""> </figure>
-        <figure class="shadow"> <img src="images/jogging.png" alt=""> </figure>
-      </div>
+    <div id="map" class="map"></div>
+    <div id="block">
+            <form class="form-inline">
+                    <label class="sr-only" for="inlineFormInputName2">Ville</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Paris..">
+                  
+                    <label class="mb-2 mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                    <select class="custom-select mb-2 mr-sm-2" id="inlineFormCustomSelect">
+                      <option selected>Activités</option>
+                      <option value="1">City</option>
+                      <option value="2">Foot</option>
+                      <option value="3">Workout</option>
+                    </select>
+                     
+                  
+                    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">GO !</button>
+                  </form>
+        {# <form action="/map" method="get" class ="ui form">
+            <div class="field">
+                <label for="ville" value="ville"></label>
+                <input type="text" name="ville" id="ville">
+                <label for="sports" value="Activité"></label>
+                <input type="text" name="sports" id="sports">
+            </div>
+            <button type="submit"><i class="icon edit"></i> GO !</button>
+        </form> #}
+        <div class="icone">
+            <ul class="icone_list">
+                    <li><a href="#"><i class="fas fa-futbol"></i></a></li>
+                    <li><a href="#"><i class="fas fa-running"></i></a></li>
+                    <li><a href="#"><i class="fas fa-bicycle"></i></a></li>
+                    <li><a href="#"><i class="fas fa-table-tennis"></i></a></li>
+            </ul>
+        <div id="login">
+                <ul class="icone_list">
+                        <li><a href="#">Connexion</a></li>
+                        <li><a href="#">Inscription</a></li>
+                </ul>
+        </div>
     </div>
-  </section>
-{% endblock %}
+
+    <script type="text/javascript">
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([3.974842,43.543136 ]),
+          zoom: 16
+          
+        })
+      });
+      ol.marker([3.974842,43.543136 ]).addTo(map);
+    </script>
+    <style> 
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    form {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    #block{
+        display: block;
+        background-color: rgba(255,255,255,0.8);
+        padding: 50px;
+        border-radius: 10px;
+        top: calc( 50% - 10vh - 50px);
+        left: calc( 50% - 25vw - 50px );
+        position: absolute;
+        width: 50vw;
+        height: 20vh;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        justify-content: center;
+        background-color: grey;
+    }
+    .map {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+      }
+    
+    .login{
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .icone_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0px;
+    }
+
+    .icone_list li a{
+        list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+}
+
+    i {
+        font-size: 35px;
+        color: black; 
+    }
+    </style>
+  {% endblock %}
