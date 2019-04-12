@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <div id="block">
+    <form action="/users" method="put">
+        <div class="field">
+            <label for="nom2"> new_nom : </label>
+            <input type="text" name="nom2" id="nom2">
+            <label for="prenom2"> new_prenom2 : </label>
+            <input type="text" name="prenom2" id="prenom2">
+            <label for="email2"> new_email2 : </label>
+            <input type="text" name="email2" id="email2">
+            <label for="birth2"> new_birth2 : </label>
+            <input type="text" name="birth2" id="birth2">
+            <label for="id"> new_id : </label>
+            <input type="text" name="id" id="id">
+        </div>
+        <button type="submit">
+        <i class="icon edit">
+        <p> Update </p>
+        </button>
+    </div>
+    <style> 
+    #block{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: grey;
+    }
+    </style>
+  {% endblock %}
