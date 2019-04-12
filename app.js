@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 //   res.write('you posted:\n')
 //   res.end(JSON.stringify(req.body, null, 2))
 // })
-
+app.use('/login', loginRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
