@@ -23,4 +23,8 @@ router.get('/update_user', function(req, res, next) {
   res.render('update_user', {});
 });
 
+router.get('/login', function(req, res, next) {
+  res.render('login', {});
+});
+
 module.exports = router;

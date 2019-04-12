@@ -29,12 +29,12 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   router.post('/', function(req, res, next) {
 
     //vérifier les données reçus en post
-    var requiredProps = ['nom', 'prenom', 'email', 'birth'];
-    for(var i in requiredProps) {
-      if(typeof req.body[requiredProps[i]] == 'undefined'){
-        console.log(requiredProps[i] + ' empty');
-        return res.send(requiredProps[i] + ' empty');
-      } 
+    var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
+    for(var i in Champs) {
+      if(typeof req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null ){
+        console.log(Champs[i] + ' empty');
+        return res.send(Champs[i] + ' empty');
+      }
     }
     //insérer les données reçu dans la BDD
     DB.collection('users').insertOne(req.body, function(err, result){
@@ -53,20 +53,19 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 
 
   router.put('/:id', function(req, res, next) {
-    console.log(req.body);
-    var new_nom = req.body.nom2,
-      new_prenom = req.body.prenom2,
-      new_email = req.body.email2,
-      new_birth = req.body.birth2;
-      console.log(new_nom, new_prenom, new_email);
-      console.log(req.params.id) ;
-      console.log(new ObjectId(req.params.id))
 
-    DB.collection('users').updateOne({ 
-      _id : new ObjectId(req.params.id)}, 
-      {$set : {nom : new_nom, prenom : new_prenom, email : new_email, birth : new_birth}}, function(err, result){
+    var new_nom = req.body.nom,
+        new_prenom = req.body.prenom,
+        new_email = req.body.email,
+        new_birth = req.body.birth;
+
+      var repere = {_id : new ObjectId(req.params.id)};
+      var new_values = {$set : {nom : new_nom, prenom : new_prenom, email : new_email, birth : new_birth}};
+
+    DB.collection('users').updateOne(repere, new_values, function(err, result){
         if (err) throw err;
 
+        console.log("MAJ ok");
         res.send('Le compte est MAJ');
       }
       );
@@ -76,12 +75,10 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   });
   
   router.delete('/:id', function(req, res, next) {
-    DB.collection('users').remove({_id: new ObjectId(req.params.id)})
+    DB.collection('users').deleteOne({_id: new ObjectId(req.params.id)})
       res.send('Le compte est supprimer');
     
   });
-
-
 
 });
 
