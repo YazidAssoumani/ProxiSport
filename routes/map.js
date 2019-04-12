@@ -44,64 +44,71 @@ router.delete('/', function(req, res, next) {
   res.send('Le compte est supprimer');
 });
 
-////////route ajout avis (comment+note)
-router.post('/:id', function(req, res, next) {
-  console.log(req.params.id)
-  console.log(req.body)
+var MongoClient = require('mongodb').MongoClient,
+url="mongodb://localhost:27017/ProxiSport";
 
-  var avisInserer = 
-  {
-    "comment" : req.body.comment,
-    "note" : req.body.note,
-    idlieu : req.params.id,
-  }
+MongoClient.connect(url,
+{userNewUrlParser:true},
+function(err, client) {
+  if(err) throw err;
+  var DB =client.db('ProxiSport');
+  console.log('Je suis connecté');
 
-  //ajouter la base de donnee
+/////////route ajouter avis
+  router.post('/:id', function(req, res, next) {
+    console.log(req.body);
+    console.log(req.params.id);
 
+    var body = req.body;
+    body.idlieu = req.params.id;
+    var requiredProps = [ 'comment', 'note', 'idlieu' ];
 
-  //reponse au client
-  res.json(avisInserer);
+    for(var i in requiredProps){
+      if(typeof body[requiredProps[i]] == 'undefined'){
+        console.log(requiredProps[i]+'empty');
+        return res.send(requiredProps[i]+'empty');
+      }
+    }
+
+     //ajouter la base de donnee
+    DB.collection('comments').insertOne(body, function(err, result){
+      //reponse au client
+      if(err) throw err;
+      console.log(result);
+      res.json({
+        result : 'OK',
+        id : result.insertedId.toString()
+      });
+    })
+  })
+
+////////route supprimer avis   
+  router.delete('/:id', function(req, res, next) {
+    console.log(req.params.id)
+      //reponse au client
+    res.send('Avis supprimé'+req.params.id);
   });
 
-  ////////route modifier avis 
+////////route modifier avis 
   router.put('/:id/:idavis', function(req, res, next) { 
     console.log(req.params.idavis)
     console.log(req.body)
-    var filter = {
-      idlieu : req.params.id,
-      idavis : req.params.idavis
-    }
-    var avisModifier= 
-    {
-      "comment" : req.body.comment,
-      "note" : req.body.note
-    }
-  
-    //modifier la base de donnee
 
-
-    //reponse au client
-    res.json(avisModifier);
+    ///manque la partie update
+    res.send(' Avis changé' );  
   });
 
 ////////route affichage avis 
-router.get('/', function(req, res, next) {
-  //appeler la base de donnee
-
-
-  //reponse au client
-  res.json([ ]);
+  router.get('/:id', function(req, res, next) {
+    //appeler la base de donnee
+    DB.collection('comments').find({idlieu:req.params.id}).toArray(function(err,comments) {
+      if(err) throw err ;
+      console.log(comments) ;
+      //[ {}, {} ]
+      //reponse au client
+      res.json(comments) ;
+    });
   });
-
-////////route supprimer avis 
-router.delete('/:id', function(req, res, next) {
-  console.log(req.params.id)
-
-  //appeler la base de donnee
-
-
-  //reponse au client
-  res.send('Avis supprimé');
 });
 
 module.exports = router;
