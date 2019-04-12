@@ -22,28 +22,15 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     //récupérer les données du compte dans la BDD
   });
 
-
-
-
-
   router.post('/', function(req, res, next) {
 
     //vérifier les données reçus en post
-<<<<<<< ecf95f7f81baec72ca848c4ebf49d6e0c9f4161a
     var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
     for(var i in Champs) {
       if(typeof req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null ){
         console.log(Champs[i] + ' empty');
         return res.send(Champs[i] + ' empty');
       }
-=======
-    var requiredProps = ['nom', 'prenom', 'email', 'birth', 'password'];
-    for(var i in requiredProps) {
-      if(typeof req.body[requiredProps[i]] == 'undefined'){
-        console.log(requiredProps[i] + ' empty');
-        return res.send(requiredProps[i] + ' empty');
-      } 
->>>>>>> Debut Login
     }
     //insérer les données reçu dans la BDD
     DB.collection('users').insertOne(req.body, function(err, result){
@@ -57,10 +44,6 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     });
     
   });
-
-
-
-
   router.put('/:id', function(req, res, next) {
 
     var new_nom = req.body.nom,
@@ -76,12 +59,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 
         console.log("MAJ ok");
         res.send('Le compte est MAJ');
-<<<<<<< ecf95f7f81baec72ca848c4ebf49d6e0c9f4161a
       });
-=======
-      }
-      );
->>>>>>> Debut Login
     //récupérer les données du compte dans la BDD
     //Modif les données du compte dans la BDD et dans la page
     
