@@ -39,7 +39,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     //insérer les données reçu dans la BDD
     DB.collection('users').insertOne(req.body, function(err, result){
       if (err) throw err;
-      console.log(result);
+      // console.log(result);
       //répondre au client avec $id du compte
       res.json({
         result : 'ok',

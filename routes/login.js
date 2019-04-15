@@ -9,10 +9,6 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   var DB = client.db('proxiSport');
   console.log('Je suis connecté !');
 
-
-
-
-
   router.post('/', function(req, res, next) {
 
     //vérifier les données reçus en post
@@ -24,14 +20,26 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
       } 
     }
     //insérer les données reçu dans la BDD
-    DB.collection('users').insertOne(req.body, function(err, result){
+    DB.collection('users').findOne({email :req.body.email}, function(err, result){
       if (err) throw err;
       console.log(result);
       //répondre au client avec $id du compte
-      res.json({
-        result : 'ok',
-        id : result.insertedId.toString()
-      });
+      if (result == '' || result == null){
+        res.send('Email non valide');
+      }
+      if (result.password != req.body.password || req.body.password == null){
+        res.send('Identifiant/Mdp incorrect');
+      }
+      else{
+        res.json({
+          result : 'connexion réussis',
+          id : result._id,
+          nom : result.nom,
+          prenom : result.prenom,
+          email : result.email,
+          password : result.password
+        });
+      }
     });
     
   });
