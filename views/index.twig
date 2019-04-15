@@ -4,9 +4,10 @@
 {% block body %}
     <div id="map" class="map"></div>
     <div id="block">
-            <form class="form-inline" action="/map" method="get">
+            <form class="form-inline" action="/map" method="get" id="search">
                     <label class="sr-only" for="inlineFormInputName2">ville</label>
                     <input type="text" name="ville" id="ville" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Paris..">
+              <ul id="listVille"></ul>
                   
                     <label class="mb-2 mr-sm-2 sr-only" for="inlineFormCustomSelect">sports</label>
                     <select class="custom-select mb-2 mr-sm-2" id="inlineFormCustomSelect" name="sports">
@@ -43,22 +44,7 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([3.974842,43.543136 ]),
-          zoom: 16
-          
-        })
-      });
-      ol.marker([3.974842,43.543136 ]).addTo(map);
-    </script>
+    <script type="text/javascript" src="/javascript/app.js"></script>
     <style> 
     body {
         margin: 0;
