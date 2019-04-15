@@ -6,6 +6,8 @@ var createError = require('http-errors'),
     indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
     loginRouter = require('./routes/login'),
+    // mapRouter = require('./routes/map1'),
+    commentRouter = require('./routes/comment'),
     bodyParser = require('body-parser');
 // var mapRouter = require('./routes/map');
 // // var mapRouter = require('./routes/map');
@@ -34,7 +36,8 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
-
+// app.use('/map1', mapRouter);
+app.use('/comment', commentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
