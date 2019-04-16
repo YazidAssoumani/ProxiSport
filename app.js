@@ -1,15 +1,28 @@
+var connectedUsers = {
+  users : {},
+  set : function(id, user) {
+    // console.log('--- set')
+    this.users[id] = user ;
+    // console.log(this.users) ;
+  },
+  get : function(id){
+    // console.log('--- get')
+    // console.log(this.users) ;
+    return this.users[id] ;
+  }
+};
+
 var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
-    indexRouter = require('./routes/index'),
-    usersRouter = require('./routes/users'),
-    loginRouter = require('./routes/login'),
-    // mapRouter = require('./routes/map1'),
-    commentRouter = require('./routes/comment'),
-    bodyParser = require('body-parser'),
-    mapRouter = require('./routes/map');
+    indexRouter = require('./routes/index')(connectedUsers),
+    usersRouter = require('./routes/users')(connectedUsers),
+    loginRouter = require('./routes/login')(connectedUsers),
+    bodyParser = require('body-parser');
+// var mapRouter = require('./routes/map');
+// // var mapRouter = require('./routes/map');
 
 var app = express();
 

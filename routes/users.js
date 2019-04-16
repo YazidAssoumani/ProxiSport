@@ -46,6 +46,11 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   });
   router.put('/:id', function(req, res, next) {
 
+    var token = req.cookies.token ;
+    var user = connectedUsers.get(token);
+    if(req.params.id != user._id.toString()) {
+      return res.send("vous ne pouvez changer les données d'un autre compte que le votre");
+    }
     var new_nom = req.body.nom,
         new_prenom = req.body.prenom,
         new_email = req.body.email,
@@ -86,5 +91,11 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 //   }))
 //   //récupérer les données du compte dans la BDD
 // });
-
-module.exports = router;
+ 
+ 
+ // et dans les modules
+ var connectedUsers = {} ;
+ module.exports = function(users) {
+  connectedUsers = users ;
+  return router;
+ }

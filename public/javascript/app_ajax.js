@@ -33,21 +33,6 @@ $('#createAccount').on('submit', function(evt){
     data : data
   }).done(function(res){
     // console.log(res) ;
-    setCookie("nom", data.nom, 365);
-    setCookie("prenom", data.prenom, 365);
-    setCookie("email", data.email, 365);
-    setCookie("birth", data.birth, 365);
-    setCookie("password", data.password, 365);
-    setCookie("id", res.id, 365);
-
-
-    var nom = getCookie("nom");
-    var prenom = getCookie("prenom");
-    var email = getCookie("email");
-    var birth = getCookie("birth");
-    var password = getCookie("password");
-    var id = getCookie("id");
-
     console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
   })
 })
@@ -78,28 +63,12 @@ $('#login_user').on('submit', function(evt){
   $(this).serializeArray().map(function(x){data[x.name] = x.value;});
   console.log(data) ;
 
-  var id = getCookie("id");
   $.ajax({
     url : '/login',
     method : 'post',
     data : data
   }).done(function(res){
-
-    setCookie("nom", data.nom, 365);
-    setCookie("prenom", data.prenom, 365);
-    setCookie("email", data.email, 365);
-    setCookie("birth", data.birth, 365);
-    setCookie("password", data.password, 365);
-    setCookie("id", res.id, 365);
-
-
-    var nom = getCookie("nom");
-    var prenom = getCookie("prenom");
-    var email = getCookie("email");
-    var birth = getCookie("birth");
-    var password = getCookie("password");
-    var id = getCookie("id");
-    // console.log(res) ;
-    console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
+    console.log(res) ;
+    // console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
   })
 })
