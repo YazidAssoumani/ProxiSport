@@ -1,129 +1,16 @@
-<<<<<<< HEAD
-=======
-* {
-  box-sizing: border-box;
-}
-
->>>>>>> 20460462e4fd00136dade00ed2832210c235ff72
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-<<<<<<< HEAD
-=======
-
-img {
-  width: 10vw;
-  height: 10vh;
-}
-
-.slidershow {
-  padding: 100px 0;
-}
-
-#content{
-  margin:50px;
-  text-align: center;
-  margin:auto;
-  width:17vw;
-  perspective:1000px;
-  position:relative;
-}
-#content-carroussel {
-  width:100%;
-  position: absolute;
-  float: right;
-  animation: slide 15s infinite linear;
-  transform-style: preserve-3d;
-}
-#content-carroussel:hover{
-  animation-play-state: paused;
-  cursor: pointer;
-}
-#content-carroussel figure{
-  width:100%;
-  height:15vh;
-  border: 1px solid #4d444d;
-  position: absolute;
-}
-
-#content-carroussel figure:nth-child(1) {
-  transform: rotateY(0deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(2) {
-  transform: rotateY(40deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(3) {
-  transform: rotateY(80deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(4) {
-  transform: rotateY(120deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(5) {
-  transform: rotateY(160deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(6) {
-  transform: rotateY(200deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(7) {
-  transform: rotateY(240deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(8) {
-  transform: rotateY(280deg) translateZ(32vw);
-}
-#content-carroussel figure:nth-child(9) {
-  transform: rotateY(320deg) translateZ(32vw);
-}
-.shadow{
-  position: absolute;
-  box-shadow: 0 0 20px 0 #000;
-  border-radius: 2px;
-}
-#content-carroussel img{
-  image-rendering: auto;
-  transition: all 0.3s;
-  width:100%;
-  height:100%;
-}
-#content-carroussel img:hover{
-  transform:scale(1.5, 2);
-  transition: all 0.3s;
-  
-}
-#content-carroussel figcaption{
-  position: absolute;
-  top:-2vh;
-  left :30%;
-  color: rgb(7, 168, 243);
-  font-weight: 700;
-}
-#content-carroussel span{
-  position: absolute;
-  top:17vh;
-  
-  color:#09c;
-  background:rgba(0,0,0,.9);
-  padding:15px;
-  border-radius:3px;
-  box-shadow:0 0 2px rgba(0,0,0,.5);
-  transform:scale(0) rotate(-12deg);
-  transition:all .25s;
-  display: none;
-}
-#content-carroussel a:hover span{
-  transform:scale(1) rotate(0);   
-  display: inherit;     
-}
-@keyframes slide{
-  from{
-      transform: rotateY(0);
-  }
-  to{
-      transform: rotateY(360deg);
-  }
-}
->>>>>>> 20460462e4fd00136dade00ed2832210c235ff72
+    #block{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: grey;
+    }

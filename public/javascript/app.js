@@ -1,7 +1,3 @@
-
-
-
-
 function initMap() {
   var myLatLng = {lat: -25.363, lng: 131.044};
   var options = {
@@ -72,4 +68,3 @@ function initMap() {
       // infowindow.open(map, marker);
     });
   }
- 

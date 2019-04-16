@@ -11,6 +11,7 @@
             <input type="text" name="prenom" id="prenom">
             <label for="email"> new_email : </label>
             <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email">
             <label for="birth"> new_birth : </label>
             <input type="text" name="birth" id="birth">
         </div>
@@ -23,4 +24,22 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/javascript/app_ajax.js"></script>
+    <style> 
+    #block{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: grey;
+    }
+    </style>
   {% endblock %}

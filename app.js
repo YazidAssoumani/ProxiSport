@@ -1,21 +1,26 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var connectedUsers = {
+  users : {},
+  set : function(id, user) {
+    // console.log('--- set')
+    this.users[id] = user ;
+    // console.log(this.users) ;
+  },
+  get : function(id){
+    // console.log('--- get')
+    // console.log(this.users) ;
+    return this.users[id] ;
+  }
+};
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var mapRouter = require('./routes/map');
 var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
-    indexRouter = require('./routes/index'),
-    usersRouter = require('./routes/users'),
-    loginRouter = require('./routes/login'),
-    // mapRouter = require('./routes/map1'),
+    indexRouter = require('./routes/index')(connectedUsers),
+    usersRouter = require('./routes/users')(connectedUsers),
+    loginRouter = require('./routes/login')(connectedUsers),
+    mapRouter = require('./routes/map'),
     commentRouter = require('./routes/comment'),
     bodyParser = require('body-parser');
 // var mapRouter = require('./routes/map');
@@ -32,6 +37,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+// app.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end(JSON.stringify(req.body, null, 2))
+// })
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -45,7 +59,7 @@ app.use(bodyParser.json());
 //   res.write('you posted:\n')
 //   res.end(JSON.stringify(req.body, null, 2))
 // })
-
+app.use('/login', loginRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);

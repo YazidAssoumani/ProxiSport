@@ -9,28 +9,30 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   var DB = client.db('proxiSport');
   console.log('Je suis connecté !');
 
-  router.post('/', function(req, res, next) {
+  router.post('/', function(data, res, next) {
 
     //vérifier les données reçus en post
     var requiredProps = ['password','email'];
     for(var i in requiredProps) {
-      if(typeof req.body[requiredProps[i]] == 'undefined'){
+      if(typeof data[requiredProps[i]] == 'undefined'){
         console.log(requiredProps[i] + ' empty');
         return res.send(requiredProps[i] + ' empty');
       } 
     }
     //insérer les données reçu dans la BDD
-    DB.collection('users').findOne({email :req.body.email}, function(err, result){
+    DB.collection('users').findOne({email :data.email}, function(err, result){
       if (err) throw err;
-      console.log(result);
+      
       //répondre au client avec $id du compte
       if (result == '' || result == null){
         res.send('Email non valide');
       }
-      if (result.password != req.body.password || req.body.password == null){
+      if (result.password != data.password || data.password == null){
         res.send('Identifiant/Mdp incorrect');
       }
       else{
+        connectedUsers.set(result._id.toString(), result) ;
+        res.cookie('token', result._id.toString())
         res.json({
           result : 'connexion réussis',
           id : result._id,
@@ -60,4 +62,8 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 //   //récupérer les données du compte dans la BDD
 // });
 
-module.exports = router;
+var connectedUsers = {} ;
+module.exports = function(users) {
+ connectedUsers = users ;
+ return router;
+};
