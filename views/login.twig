@@ -2,18 +2,18 @@
 
 {% block body %}
 
-    <form action="/login" style="margin-left: 30%; margin-right: 30%; margin-top:10%">
+    <form id="login_user" style="margin-left: 30%; margin-right: 30%; margin-top:10%">
   <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="/javascript/app_ajax.js"></script>
   {% endblock %}

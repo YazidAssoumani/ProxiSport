@@ -3,7 +3,7 @@
 {% block body %}
 
     <div id="block">
-    <form action="/users" method="put">
+    <form id="update_user">
         <div class="field">
             <label for="nom"> new_nom : </label>
             <input type="text" name="nom" id="nom">
@@ -18,23 +18,9 @@
         <i class="icon edit">
         <p> Update </p>
         </button>
+    </form>
     </div>
-    <style> 
-    #block{
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    button{
-        width:10vw;
-        height: 5vh;
-    }
-    .field{
-        padding: 2vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background-color: grey;
-    }
-    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/javascript/app_ajax.js"></script>
   {% endblock %}
