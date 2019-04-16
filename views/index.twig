@@ -2,7 +2,7 @@
 
 {% block body %}
     <div id="googleMap" class="googleMap"></div>
-    <div id="block">
+    <div id="block" >
             <form class="form-inline" action="" method="get" id="search">
                     <label class="sr-only" for="inlineFormInputName2">ville</label>
                     <input type="text" name="ville" id="ville" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Paris..">
@@ -41,6 +41,13 @@
                         <li><a href="#">Inscription</a></li>
                 </ul>
         </div>
+         <div id="avis">
+         1- On affichera la l'ensemble des résultats des recherche
+         2- On mettra les avis et notes 
+         3- etc       
+        
+        </div>
+
     </div>
 
     <script type="text/javascript" src="/javascript/app.js"></script>
@@ -59,11 +66,18 @@
         background-color: rgba(255,255,255,0.8);
         padding: 50px;
         border-radius: 10px;
-        top: calc( 50% - 10vh - 50px);
-        left: calc( 50% - 25vw - 50px );
+     
         position: absolute;
-        width: 50vw;
-        height: 20vh;
+        margin-top:100px;
+       
+        display: flex;
+left: 0pt;
+top: 0;
+height: 100vh;
+flex-direction: column;
+width: 50vw;
+
+width: 250px;
     }
     button{
         width:10vw;
