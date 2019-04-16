@@ -10,8 +10,8 @@ $('#createAccount').on('submit', function(evt){
     method : 'post',
     data : data
   }).done(function(res){
-    // console.log(res) ;
-    console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
+    console.log(res) ;
+
   })
 })
 
