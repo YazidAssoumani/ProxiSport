@@ -50,6 +50,8 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/map' , mapRouter);
+app.use('/login', loginRouter);
+app.use('/comment', commentRouter);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -59,12 +61,7 @@ app.use(bodyParser.json());
 //   res.write('you posted:\n')
 //   res.end(JSON.stringify(req.body, null, 2))
 // })
-app.use('/login', loginRouter);
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/login', loginRouter);
 // app.use('/map1', mapRouter);
-app.use('/comment', commentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
