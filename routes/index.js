@@ -6,6 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+//   res.render('index', { title: 'ProxiSport' });
+// });
+
+/* GET CGU. */
 router.get('/cgu', function(req, res, next) {
   res.render('cgu', {});
 });
@@ -14,5 +18,20 @@ router.get('/cgu', function(req, res, next) {
 // router.get('/map', function(req, res, next) {
 //   res.render('map', {});
 // });
+router.get('/connexion_user', function(req, res, next) {
+  res.render('connexion_user', {});
+});
+
+router.get('/create_user', function(req, res, next) {
+  res.render('create_user', {});
+});
+
+router.get('/update_user', function(req, res, next) {
+  res.render('update_user', {});
+});
+
+router.get('/login', function(req, res, next) {
+  res.render('login', {});
+});
 
 module.exports = router;

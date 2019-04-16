@@ -7,6 +7,18 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mapRouter = require('./routes/map');
+var createError = require('http-errors'),
+    express = require('express'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    logger = require('morgan'),
+    indexRouter = require('./routes/index'),
+    usersRouter = require('./routes/users'),
+    loginRouter = require('./routes/login'),
+    bodyParser = require('body-parser');
+// var mapRouter = require('./routes/map');
+// // var mapRouter = require('./routes/map');
+
 var app = express();
 
 // view engine setup
@@ -22,6 +34,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/map' , mapRouter);
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+// app.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end(JSON.stringify(req.body, null, 2))
+// })
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

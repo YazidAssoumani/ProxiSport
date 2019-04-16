@@ -1,0 +1,35 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <div id="block">
+    <form action="/" method="post" class ="ui form">
+        <div class="field">
+            <label for="identifiant"> Identifiant : </label>
+            <input type="text" name="identifiant" id="identifiant">
+            <label for="Password"> Password : </label>
+            <input type="text" name="Password" id="Password">
+        </div>
+        <button type="submit">
+        <i class="icon edit">
+        <p> Connexion </p>
+        </button>
+    </div>
+    <style> 
+    #block{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button{
+        width:10vw;
+        height: 5vh;
+    }
+    .field{
+        padding: 2vh;
+        display: flex;
+        justify-content: center;
+        background-color: grey;
+    }
+    </style>
+  {% endblock %}

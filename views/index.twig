@@ -2,18 +2,19 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <div id="map" class="map"></div>
+    <div id="googleMap" class="googleMap"></div>
     <div id="block">
-            <form class="form-inline">
-                    <label class="sr-only" for="inlineFormInputName2">Ville</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Paris..">
+            <form class="form-inline" action="" method="get" id="search">
+                    <label class="sr-only" for="inlineFormInputName2">ville</label>
+                    <input type="text" name="ville" id="ville" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Paris..">
+              <ul id="listVille"></ul>
                   
-                    <label class="mb-2 mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                    <select class="custom-select mb-2 mr-sm-2" id="inlineFormCustomSelect">
-                      <option selected>Activités</option>
-                      <option value="1">City</option>
-                      <option value="2">Foot</option>
-                      <option value="3">Workout</option>
+                    <label class="mb-2 mr-sm-2 sr-only" for="inlineFormCustomSelect">sports</label>
+                    <select class="custom-select mb-2 mr-sm-2" id="inlineFormCustomSelect" name="sports">
+                      <option selected id="sports">Activités</option>
+                      <option value="city"><p>City<i class="fas fa-futbol"></i><p></option>
+                      <option value="foot">Foot</option>
+                      <option value="workout">Workout</option>
                     </select>
                      
                   
@@ -43,22 +44,7 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([3.974842,43.543136 ]),
-          zoom: 16
-          
-        })
-      });
-      ol.marker([3.974842,43.543136 ]).addTo(map);
-    </script>
+    <script type="text/javascript" src="/javascript/app.js"></script>
     <style> 
     body {
         margin: 0;
@@ -90,10 +76,10 @@
         justify-content: center;
         background-color: grey;
     }
-    .map {
+    .googleMap {
         display: flex;
-        height: 100%;
-        width: 100%;
+        height: 100vh;
+        width: 100vw;
         margin: 0;
         padding: 0;
 
