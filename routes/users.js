@@ -25,25 +25,53 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   router.post('/', function(req, res, next) {
 
     //vérifier les données reçus en post
-    var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
-    for(var i in Champs) {
-      if(typeof req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null ){
-        console.log(Champs[i] + ' empty');
-        return res.send(Champs[i] + ' empty');
-      }
+    // var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
+    // for(var i in Champs) {
+    //   if(req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null ){
+    //     console.log(Champs[i] + ' empty');
+    //     return res.send(Champs[i] + ' empty');
+    //   }
+    // }
+
+    var birth = Number(req.body.birth),
+        regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
+    if(!regex.test(req.body.email)) {
+      res.send('Renseignez une adresse mail correcte !!');
     }
-    //insérer les données reçu dans la BDD
-    DB.collection('users').insertOne(req.body, function(err, result){
-      if (err) throw err;
-      // console.log(result);
-      //répondre au client avec $id du compte
-      res.json({
-        result : 'ok',
-        id : result.insertedId.toString()
+    else if(birth>2019 || birth<1920) {
+      res.send('Vote date de naissance est incorrecte');
+    }
+    else {
+      //verfication existence email
+      DB.collection('users').findOne({email : req.body.email}, function(err, result){
+        if (err) throw err;
+        
+        //répondre au client avec $id du compte
+        if (req.body.email == result.email){
+          console.log('Email déjà prise');
+          return res.send('Email déjà prise');          
+        }
+        else {
+          var newUser = req.body ;
+            DB.collection('users').insertOne(newUser, function(err, result){
+            if (err) throw err;
+            // console.log(result);
+            //répondre au client avec $id du compte
+            newUser._id = result.insertedId ;
+            connectedUsers.set(result.insertedId.toString(), newUser);
+            res.cookie('token', result.insertedId.toString());
+            res.json({
+              result : 'ok',
+              id : result.insertedId.toString()
+            });
+          });
+        }
       });
-    });
-    
+      //insérer les données reçu dans la BDD
+      
+    }
   });
+
   router.put('/:id', function(req, res, next) {
 
     var token = req.cookies.token ;
