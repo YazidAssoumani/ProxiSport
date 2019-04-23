@@ -6,12 +6,12 @@
 */
 var fs = require('fs'),
   MongoClient = require('mongodb').MongoClient,
-  url = 'mongodb://localhost:27017/ProxiSport';
+  url = 'mongodb://localhost:27017/proxiSport';
 
 MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   if (err) throw err;
   
-  var DB = client.db('ProxiSport');
+  var DB = client.db('proxiSport');
   // décommenter pour purger la collection avant import
   // DB.collection('maps').drop();
   

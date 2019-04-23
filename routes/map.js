@@ -6,11 +6,11 @@ ObjectId = require('mongodb').objectId,
 
 //---------Connexion BDD---------------
 MongoClient= require('mongodb').MongoClient,
-url = "mongodb://localhost:27017/ProxiSport";
+url = "mongodb://localhost:27017/proxiSport";
 MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     if(err) throw err;
 
-    var DB = client.db('ProxiSport') ;
+    var DB = client.db('proxiSport') ;
     console.log('Connecté');
 
 // plus paranthéses fin des routes
@@ -50,8 +50,9 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 
     // Tableau objets toute les result
 
+    console.log(maps.length)
   // res.json(result);
-  res.json(maps);
+    res.json(maps);
  
 
   })
