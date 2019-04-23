@@ -3,7 +3,24 @@ function initMap() {
   var options = {
     zoom : 2,
     center : myLatLng,
-    mapTypeControl: false
+    // mapTypeControl: false
+
+    mapTypeControl: true,
+          mapTypeControlOptions: {
+              // style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+               position: google.maps.ControlPosition.RIGHT_BOTTOM,
+            
+          },
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+          scaleControl: true,
+          streetViewControl: true,
+          streetViewControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+          // fullscreenControl: true
   };
   var mapStyles = [
     
