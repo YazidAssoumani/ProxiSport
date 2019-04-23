@@ -34,7 +34,6 @@ var image = {
 
       //   infowindow.open(map, marker);
       // });
-
 ////////////// Autocomplession
 
 

@@ -20,8 +20,8 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   //Afficher dans la map le lieu selectionner.
   router.get('/', function(req, res, next) {
 
-  //  var [lat,lng] = req.query.coords.split(',');
-  //  var sports_choisi = req.query.sports;
+ //var [lat,lng] = req.query.coords.split(',');
+// var sports_choisi = req.query.sports;
   console.log(req.query)
     DB.collection('maps').find(req.query).toArray(function(err, maps){
       if(err) throw err ;

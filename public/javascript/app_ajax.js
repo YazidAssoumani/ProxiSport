@@ -1,3 +1,7 @@
+$('#connexion').hide();
+$('#block_inscription').hide();
+$('#block_inscription').hide();
+
 $('#createAccount').on('submit', function(evt){
   evt.stopPropagation();
   evt.preventDefault() ;
@@ -46,4 +50,15 @@ $('#login_user').on('submit', function(evt){
     console.log(res) ;
     // console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
   })
+})
+
+$('#users').on('click', function(evt){
+  $('#connexion').show();
+  $('#block_connexion').show();
+  $('#block_inscription').hide();
+})
+
+$('#lien_inscription').on('click', function(evt){
+  $('#block_connexion').hide();
+  $('#block_inscription').show();
 })
