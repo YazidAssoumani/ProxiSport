@@ -19,17 +19,40 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   //récupérer les données sélectionner par l'utilisateur dans la BDD (API)
   //Afficher dans la map le lieu selectionner.
   router.get('/', function(req, res, next) {
-
-  //  var [lat,lng] = req.query.coords.split(',');
-  //  var sports_choisi = req.query.sports;
+    console.log("hello");
+  // var [lat,lng] = req.query.coords.split(',');
+  // var sports_choisi = req.query.sports;
   console.log(req.query)
-    DB.collection('maps').find(req.query).toArray(function(err, maps){
+  //  res.send('here') ;
+  var request = req.query ;
+    if(request.boundsNE && request.boundsSW) {
+
+      var r = [
+        {
+          "coords.lat" : {"$lte" : request.boundsNE.lat},
+          "coords.lng" : {"$lte" : request.boundsNE.lng},
+        },
+        {
+          "coords.lat" : {"$gte" : request.boundsSW.lat},
+          "coords.lng" : {"$gte" : request.boundsSW.lng},
+        }
+      ] ;
+      delete request.boundsNE ;
+      delete request.boundsSW ;
+      if(request && Object.keys(request).length)
+        r.push(request) ;
+      request = {'$and' : r} ;
+    }
+    console.log(JSON.stringify(request)) ;
+
+    DB.collection('maps').find(request).limit(200).toArray(function(err, maps){
       if(err) throw err ;
 
-    // Tableau objets toute les maps
+    // Tableau objets toute les result
 
+  // res.json(result);
   res.json(maps);
-  
+ 
 
   })
 
