@@ -1,7 +1,16 @@
 function initMap() {
-  var myLatLng = {lat: -25.363, lng: 131.044};
+  navigator.geolocation.getCurrentPosition(function(pos){
+    console.log(pos.coords) ;
+    loadMap({lat: pos.coords.latitude, lng: pos.coords.longitude});
+  }, function(){
+    loadMap({lat: -25.363, lng: 131.044});
+  })
+}
+function loadMap(myLatLng) {
+
+
   var options = {
-    zoom : 2,
+    zoom : 14,
     center : myLatLng,
     // mapTypeControl: false
 
@@ -28,7 +37,31 @@ function initMap() {
   // Create a map object and specify the DOM element
   // for display.
   var map = new google.maps.Map(document.getElementById('googleMap'), options);
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bds = map.getBounds();
+    var South_Lat = bds.getSouthWest().lat();
+    var South_Lng = bds.getSouthWest().lng();
+    var North_Lat = bds.getNorthEast().lat();
+    var North_Lng = bds.getNorthEast().lng();
+    console.log(South_Lat,South_Lng,North_Lat,North_Lng);
 
+
+    $.ajax({
+      url : '/map?boundsNE[lat]='+North_Lat+'&boundsNE[lng]='+North_Lng+'&boundsSW[lat]='+South_Lat+'&boundsSW[lng]='+South_Lng,
+      method : 'GET',
+    }).done(function(res){
+      console.log(res) ;
+      $.each( res, function( i, point ) {
+        // if (type == "Football"){}
+        var marker = new google.maps.Marker({
+          position:new google.maps.LatLng(point.coords.lat, point.coords.lng),
+          map: map,
+          zoom: 2,
+          icon: image
+          });            
+        });
+    })
+});
 
 ////////////////// ADD Marker
 var image = {
@@ -42,16 +75,36 @@ var image = {
 };
 
 
-  var marker = new google.maps.Marker({
-    position:{lat: 46.25, lng:6},
-    map: map,
-    zoom: 2,
-    icon: image 
-    });
+  // var marker = new google.maps.Marker({
+  //   position:{lat: 46.25, lng:6},
+  //   map: map,
+  //   zoom: 2,
+  //   icon: image 
+  //   });
 
+
+    $(document).ready(function(){
+     
+
+
+      // $.ajax({
+      //   url : '/map',
+      //   method : 'GET',
+      // }).done(function(res){
+      //   console.log(res) ;
+      //   $.each( res, function( i, point ) {
+      //     // if (type == "Football"){}
+      //     var marker = new google.maps.Marker({
+      //       position:new google.maps.LatLng(point.coords.lat, point.coords.lng),
+      //       map: map,
+      //       zoom: 2,
+      //       icon: image
+      //       });            
+      //     });
+      // })
+    });
       //   infowindow.open(map, marker);
       // });
-
 ////////////// Autocomplession
 
 
@@ -85,6 +138,8 @@ var image = {
        console.log("hola", queryloc)
       }
 
+    });
+
       google.maps.event.addListener(map, 'dragend', function() {
         /* On récupère les coordonnées des coins de la map */ 
         var bds = map.getBounds();
@@ -113,7 +168,6 @@ var image = {
         
 
 
-    });
 
   }
 /////////// Requête ajax geopoints

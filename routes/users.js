@@ -25,16 +25,17 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   router.post('/', function(req, res, next) {
 
     //vérifier les données reçus en post
-    // var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
-    // for(var i in Champs) {
-    //   if(req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null ){
-    //     console.log(Champs[i] + ' empty');
-    //     return res.send(Champs[i] + ' empty');
-    //   }
-    // }
+    var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
+    for(var i in Champs) {
+      if(req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null || req.body[Champs[i]] == '' ){
+        console.log(Champs[i] + ' empty');
+        return res.send(Champs[i] + ' empty');
+      }
+    }
 
     var birth = Number(req.body.birth),
         regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
+        
     if(!regex.test(req.body.email)) {
       res.send('Renseignez une adresse mail correcte !!');
     }
