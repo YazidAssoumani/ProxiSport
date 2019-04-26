@@ -46,7 +46,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
       //verfication existence email
       DB.collection('users').findOne({email : req.body.email}, function(err, result){
         if (err) throw err;
-        
+        console.log(result, req.body);
         //répondre au client avec $id du compte
         if (result != null && req.body.email == result.email){
           console.log('Email déjà prise');
