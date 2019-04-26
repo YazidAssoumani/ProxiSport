@@ -1,5 +1,5 @@
 $('#connexion').hide();
-$('#block_inscription').hide();
+$('#block_connexion').hide();
 $('#block_inscription').hide();
 
 $('#createAccount').on('submit', function(evt){
@@ -15,7 +15,13 @@ $('#createAccount').on('submit', function(evt){
     data : data
   }).done(function(res){
     console.log(res) ;
-
+    if (res.message == 'ok'){
+      alert(res.message);
+      $('#block_inscription').hide();
+    }
+    else{
+      alert(res.message);
+    }
   })
 })
 
@@ -32,6 +38,7 @@ $('#update_user').on('submit', function(evt){
   }).done(function(res){
     console.log(res) ;
     console.log('Communication avec Ajax');
+    alert(res.message);
   })
 })
 
@@ -48,7 +55,13 @@ $('#login_user').on('submit', function(evt){
     data : data
   }).done(function(res){
     console.log(res) ;
-    // console.log('Communication avec Ajax' + ' nom : ' +nom+ ' prenom : ' +prenom+ ' email : ' +email+ ' naissance : ' +birth+ ' Mdp : ' +password + 'id :'+id);
+    if (res.message == 'ok'){
+      alert(res.message);
+      $('#block_connexion').hide();
+    }
+    else{
+      alert(res.message);
+    }
   })
 })
 

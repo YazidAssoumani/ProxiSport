@@ -13,7 +13,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     //vérifier les données reçus en post
       var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
       if(!regex.test(req.body.email)) {
-        res.send('Renseignez une adresse mail correcte !!');
+        res.json({message : 'Renseignez une adresse mail correcte !!'});
       }
       else {
         DB.collection('users').findOne({email : req.body.email}, function(err, result){
@@ -21,18 +21,18 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
           
           //répondre au client avec $id du compte
           if (result == '' || result == null){
-            res.send('Email non valide');
+            res.json({message : 'Email non valide'});
             console.log('Email non valide');
             
           }
           if (result.password != req.body.password || req.body.password == null){
-            res.send('Identifiant/Mdp incorrect');
+            res.json({message : 'Identifiant/Mdp incorrect'});
             console.log('Identifiant/Mdp incorrect');
           }
           else{
             connectedUsers.set(result._id.toString(), result) ;
             res.cookie('token', result._id.toString());
-            res.send('connexion OK');
+            res.json({message : 'ok'});
     
           }
         });

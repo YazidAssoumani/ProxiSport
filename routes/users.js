@@ -29,7 +29,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
     for(var i in Champs) {
       if(req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null || req.body[Champs[i]] == '' ){
         console.log(Champs[i] + ' empty');
-        return res.send(Champs[i] + ' empty');
+        return res.json({message : Champs[i] + ' empty'});
       }
     }
 
@@ -37,10 +37,10 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
         regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
         
     if(!regex.test(req.body.email)) {
-      res.send('Renseignez une adresse mail correcte !!');
+      res.json({message : 'Renseignez une adresse mail correcte !!'});
     }
     else if(birth>2019 || birth<1920) {
-      res.send('Vote date de naissance est incorrecte');
+      res.json({message : 'Vote date de naissance est incorrecte'});
     }
     else {
       //verfication existence email
@@ -48,9 +48,9 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
         if (err) throw err;
         
         //répondre au client avec $id du compte
-        if (req.body.email == result.email){
+        if (result != null && req.body.email == result.email){
           console.log('Email déjà prise');
-          return res.send('Email déjà prise');          
+          return res.json({message : 'Email déjà prise'});          
         }
         else {
           var newUser = req.body ;
@@ -62,7 +62,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
             connectedUsers.set(result.insertedId.toString(), newUser);
             res.cookie('token', result.insertedId.toString());
             res.json({
-              result : 'ok',
+              message : 'ok',
               id : result.insertedId.toString()
             });
           });
@@ -92,7 +92,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
         if (err) throw err;
 
         console.log("MAJ ok");
-        res.send('Le compte est MAJ');
+        res.json({message : 'Le compte est MAJ'});
       });
     //récupérer les données du compte dans la BDD
     //Modif les données du compte dans la BDD et dans la page
@@ -101,7 +101,7 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
   
   router.delete('/:id', function(req, res, next) {
     DB.collection('users').deleteOne({_id: new ObjectId(req.params.id)})
-      res.send('Le compte est supprimer');
+      res.json({message : 'Le compte est supprimer'});
     
   });
 
