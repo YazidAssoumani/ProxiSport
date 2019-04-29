@@ -1,7 +1,7 @@
 # ProxiSport
 
 
-## BUTS
+### BUTS
 
 Répertorier et afficher sur une carte tous les espaces publics extérieurs où l'on peut pratiquer du sport tout en apportant une description pour chacun de ces espaces :
 - le type de sport qu'il est possible de pratiquer,
@@ -16,7 +16,7 @@ Créer un profil utilisateur qui permet à ce dernier de :
 - partager ses habitudes sportives et d'échanger sur celles des autres => créer une communauté.
 
 
-## CONTEXTE D'UTILISATION
+### CONTEXTE D'UTILISATION
 
 Pour les sportifs assidus ou temporaires en extérieur en France.
 
@@ -26,9 +26,9 @@ L'accès Internet est requis.
 - si pas d'Internet, afficher un message d'avertissement.
 
 
-## TÂCHES
+### TÂCHES
 
-### Page d'accueil
+#### Page d'accueil
 1 - Mettre en place 2 champs de recherche : 
 * le premier affiche des suggestions de résultats pour la commune où l'utilisateur désire faire du sport => requête à faire en **AJAX** avec la méthode GET (pour lire les noms de communes qu'il y a dans l'*API* Google Maps).
 * le second renseigne les filtres d'activités sportives choisies par l'utilisateur après qu'il ait cliqué sur un ou plusieurs boutons.
@@ -42,7 +42,7 @@ L'accès Internet est requis.
 * le faire sous la forme d'un pop-up (plus ou moins) lorsque l'application est utilisée pour la première fois.
 * puis laisser un lien en bas de page pour que ces conditions puissent être consultées plus tard.
 
-### Page Map
+#### Page Map
 1 - Afficher la carte de la commune désirée :
 * après avoir envoyé une requête en méthode GET à l'*API* Google Maps.
 
@@ -62,7 +62,7 @@ L'accès Internet est requis.
 * ajouter de nouvelles images sur un espace sportif auquel il a déjà donné son avis.
 * ajouter un nouvel espace sportif dans la base de données de l'application => requête à faire en **AJAX** avec la méthode POST.
 
-### Page User
+#### Page User
 1 - Afficher les détails du compte :
 * requête **AJAX** avec la méthode GET.
 
@@ -75,32 +75,17 @@ L'accès Internet est requis.
 ***⚠️ Mettre de la PUBLICITÉ dans chaque page ⚠️***
 
 
-## RESSOURCES 
+### ÉQUIPE
 
-Équpe (6 élèves en formation débutant dans le milieu du développement web et mobile) :
-- Axel    => 
-- Nico    =>
-- Mohamed =>
-- Mourad  =>
-- Yazid   => Base de données (attribution des rôles)
-- Yohan   =>
-
-
-## BUDGET
-
-78j/hommes :
-- rénumérer par les annonceurs de publicité et la Mairie de Genève ;p
+6 étudiants débutant dans le milieu du développement web et mobile :
+- Axel
+- Nico
+- Mohamed
+- Mourad
+- Yazid
+- Yohan
 
 
-## DÉLAIS
+### BUDGET
 
-Livraison prévu le 1er Mai !!!
-
-
-## RAPPORT CONSTANT DE L'AVANCÉE DU TRAVAIL
-
-RDV avec le client tous les jours :
-- faire le planning du projet en forme de tableau.
-	* 1ere semaine : Partie graphique, front puis back (node.js)
-	* 2eme semaine : creation page utilisateurs, developpement application mobile.
-	* 3eme projet terminé.
+78j/hommes => rénumérés par les annonceurs de publicité.
