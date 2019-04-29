@@ -18,12 +18,11 @@ Créer un profil utilisateur qui permet à ce dernier de :
 
 ### CONTEXTE D'UTILISATION
 
-Pour les sportifs assidus ou temporaires en extérieur en France.
+	Pour les sportifs assidus ou temporaires en extérieur en France.
 
-Avec un smartphone, une tablette ou un PC.
+	Avec un smartphone, une tablette ou un PC.
 
-L'accès Internet est requis. 
-- si pas d'Internet, afficher un message d'avertissement.
+	L'accès Internet est requis (si pas d'Internet, afficher un message d'avertissement).
 
 
 ### TÂCHES
@@ -78,14 +77,9 @@ L'accès Internet est requis.
 ### ÉQUIPE
 
 6 étudiants débutant dans le milieu du développement web et mobile :
-- Axel
-- Nico
-- Mohamed
-- Mourad
-- Yazid
-- Yohan
 
+	Axel, Yohan, Nico, Mourad, Yazid, Mohamed.
 
-### BUDGET
+Budget :
 
-78j/hommes => rénumérés par les annonceurs de publicité.
+	78j/hommes à rénumérés par les annonceurs de publicité.
