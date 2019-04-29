@@ -32,11 +32,33 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
           else{
             connectedUsers.set(result._id.toString(), result) ;
             res.cookie('token', result._id.toString());
-            res.json({message : 'ok'});
+            res.json({message : 'ok',
+                      result});
     
           }
         });
       }
+
+    //insérer les données reçu dans la BDD
+    
+  });
+
+  router.get('/:id', function(req, res, next) {
+
+    var token = req.cookies.token ;
+    var user = connectedUsers.get(token);
+    if(req.params.id != user._id.toString()) {
+      return res.json({ message : "vous ne pouvez déconnecter une autre personne.."});
+    }
+    if( req.params.id == '' || req.params.id == null){
+      return res.json({ message : "Identifiant incorrect"});
+    }
+    //vérifier les données reçus en post
+      res.cookie('token', '');
+      connectedUsers.set(req.params.id, '');
+      res.json({message : 'Deconnexion ok'});
+      
+      
 
     //insérer les données reçu dans la BDD
     

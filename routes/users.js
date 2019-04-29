@@ -75,31 +75,78 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
 
   router.put('/:id', function(req, res, next) {
 
+    var Champs = ['nom', 'prenom', 'email', 'birth', 'password'];
+    for(var i in Champs) {
+      if(req.body[Champs[i]] == 'undefined' || req.body[Champs[i]] == null || req.body[Champs[i]] == '' ){
+        console.log(Champs[i] + ' empty');
+        return res.json({message : Champs[i] + ' empty'});
+      }
+    }
+
     var token = req.cookies.token ;
     var user = connectedUsers.get(token);
     if(req.params.id != user._id.toString()) {
-      return res.send("vous ne pouvez changer les données d'un autre compte que le votre");
+      return res.json({ message : "vous ne pouvez changer les données d'un autre compte que le votre"});
     }
-    var new_nom = req.body.nom,
-        new_prenom = req.body.prenom,
-        new_email = req.body.email,
-        new_birth = req.body.birth;
+    if( req.params.id == '' || req.params.id == null){
+      return res.json({ message : "Identifiant incorrect"});
+    }
 
-      var repere = {_id : new ObjectId(req.params.id)};
-      var new_values = {$set : {nom : new_nom, prenom : new_prenom, email : new_email, birth : new_birth}};
+    var birth = Number(req.body.birth),
+        regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
+        
+    if(!regex.test(req.body.email)) {
+      res.json({message : 'Renseignez une adresse mail correcte !!'});
+    }
+    if(birth>2019 || birth<1920) {
+      res.json({message : 'Vote date de naissance est incorrecte'});
+    }
 
-    DB.collection('users').updateOne(repere, new_values, function(err, result){
+    else{
+
+      DB.collection('users').findOne({email : req.body.email}, function(err, result){
         if (err) throw err;
+        
+        //répondre au client avec $id du compte
+        if (result != null && req.body.email == result.email){
+          console.log('Email déjà prise');
+          return res.json({message : 'Email déjà prise'});          
+        }
 
-        console.log("MAJ ok");
-        res.json({message : 'Le compte est MAJ'});
+        else{
+
+          var new_nom = req.body.nom,
+            new_prenom = req.body.prenom,
+            new_email = req.body.email,
+            new_birth = req.body.birth,
+            new_password = req.body.password;
+
+          var repere = {_id : new ObjectId(req.params.id)};
+          var new_values = {$set : {nom : new_nom, prenom : new_prenom, email : new_email, birth : new_birth, password : new_password}};
+
+          DB.collection('users').updateOne(repere, new_values, function(err, result){
+            if (err) throw err;
+
+            console.log("MAJ ok");
+            res.json({message : 'Le compte est MAJ'});
+          });
+        }
       });
-    //récupérer les données du compte dans la BDD
-    //Modif les données du compte dans la BDD et dans la page
+    }
     
   });
   
   router.delete('/:id', function(req, res, next) {
+    var token = req.cookies.token ;
+    var user = connectedUsers.get(token);
+    if(req.params.id != user._id.toString()) {
+      return res.json({ message : "vous ne pouvez changer les données d'un autre compte que le votre"});
+    }
+    if( req.params.id == '' || req.params.id == null){
+      return res.json({ message : "Identifiant incorrect"});
+    }
+    res.cookie('token', '');
+    connectedUsers.set(req.params.id, '');
     DB.collection('users').deleteOne({_id: new ObjectId(req.params.id)})
       res.json({message : 'Le compte est supprimer'});
     
