@@ -108,11 +108,6 @@ MongoClient.connect(url, {useNewUrlParser:true}, function(err, client) {
         if (err) throw err;
         
         //répondre au client avec $id du compte
-        if (result != null && req.body.email == result.email){
-          console.log('Email déjà prise');
-          return res.json({message : 'Email déjà prise'});          
-        }
-
         else{
 
           var new_nom = req.body.nom,
