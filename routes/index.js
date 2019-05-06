@@ -27,8 +27,4 @@ router.get('/login', function(req, res, next) {
   res.render('login', {});
 });
 
-var connectedUsers = {} ;
-module.exports = function(users) {
- connectedUsers = users ;
- return router;
-};
+module.exports = router;

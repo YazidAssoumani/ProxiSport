@@ -1,27 +1,10 @@
-var connectedUsers = {
-  users : {},
-  set : function(id, user) {
-    // console.log('--- set')
-    this.users[id] = user ;
-    // console.log(this.users) ;
-  },
-  get : function(id){
-    // console.log('--- get')
-    // console.log(this.users) ;
-    return this.users[id] ;
-  }
-};
-
 var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
-    indexRouter = require('./routes/index')(connectedUsers),
-    usersRouter = require('./routes/users')(connectedUsers),
-    loginRouter = require('./routes/login')(connectedUsers),
-    mapRouter = require('./routes/map')(connectedUsers),
-    commentRouter = require('./routes/comment'),
+    indexRouter = require('./routes/index'),
+    noteRouter = require('./routes/note'),
     bodyParser = require('body-parser');
 // var mapRouter = require('./routes/map');
 // // var mapRouter = require('./routes/map');
@@ -48,10 +31,7 @@ app.use(bodyParser.json());
 // })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/map' , mapRouter);
-app.use('/login', loginRouter);
-app.use('/comment', commentRouter);
+app.use('/note', noteRouter);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
